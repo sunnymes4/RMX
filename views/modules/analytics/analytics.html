@@ -1,0 +1,77 @@
+<div class="row">
+    <div class="{{classForMainContent}}" id="an-page">
+        <div class="col-lg-12 hierarchy">
+            <div class="row">
+                <div class="col-md-11 col-sm-11">
+                    <h2 class="clr1 text-center">
+                        <span>Analytics</span>
+                    </h2>
+                </div>
+                <div class="col-md-1 col-sm-1">
+                    <a href="" ng-click="toggleSideBar()"><span class="col-view pull-right"><b><i
+                            class="fa fa-angle-double-right fa-2x"></i></b></span></a>
+                </div>
+            </div>
+            <div class="container-main pad-none" id="dmGrids">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 attribute">
+                    <div class="custom-accordion">
+                        <accordion close-others="false" >
+                        <accordion-group class="cursor-pointer" ng-init="recommenGrid = true" is-open="recommenGrid" >
+                            <accordion-heading ag-grid-resize watch="recommenGrid" gridapi="recommendationGridOptions">
+                                Sales Analysis <span class="pull-right"><i class="pull-right glyphicon"
+                                                                       ng-class="{'glyphicon glyphicon-minus-sign': recommenGrid, 'glyphicon glyphicon-plus-sign': !recommenGrid}"></i></span>
+
+                            </accordion-heading>
+                            <img src="assets/images/sales-analysis1.jpg" class="img-responsive" width="100%"/>
+
+                        </accordion-group>
+                        <accordion-group class="cursor-pointer" is-open="alertGrid">
+                            <accordion-heading ag-grid-resize watch="alertGrid" gridapi="alertGridOptions">
+                                Assortment Recommendations<span class="pull-right"><i class="pull-right glyphicon"
+                                                                   ng-class="{'glyphicon glyphicon-minus-sign': alertGrid, 'glyphicon glyphicon-plus-sign': !alertGrid}"></i></span>
+                            </accordion-heading>
+                            <img src="assets/images/assortment-recom.jpg" class="img-responsive m-t-sm" width="100%"/>
+                        </accordion-group>
+                        <accordion-group class="cursor-pointer" is-open="alertGrid">
+                            <accordion-heading ag-grid-resize watch="alertGrid" gridapi="alertGridOptions">
+                                Promotion Recommendations<span class="pull-right"><i class="pull-right glyphicon"
+                                                                                      ng-class="{'glyphicon glyphicon-minus-sign': alertGrid, 'glyphicon glyphicon-plus-sign': !alertGrid}"></i></span>
+                            </accordion-heading>
+                        </accordion-group>
+                        <accordion-group class="cursor-pointer" is-open="alertGrid">
+                            <accordion-heading ag-grid-resize watch="alertGrid" gridapi="alertGridOptions">
+                                Markdown Recommendations<span class="pull-right"><i class="pull-right glyphicon"
+                                                                                     ng-class="{'glyphicon glyphicon-minus-sign': alertGrid, 'glyphicon glyphicon-plus-sign': !alertGrid}"></i></span>
+                            </accordion-heading>
+                        </accordion-group>
+                        <accordion-group class="cursor-pointer" is-open="alertGrid">
+                            <accordion-heading ag-grid-resize watch="alertGrid" gridapi="alertGridOptions">
+                                New SKU Analysis<span class="pull-right"><i class="pull-right glyphicon"
+                                                                                     ng-class="{'glyphicon glyphicon-minus-sign': alertGrid, 'glyphicon glyphicon-plus-sign': !alertGrid}"></i></span>
+                            </accordion-heading>
+                        </accordion-group>
+                        <accordion-group class="cursor-pointer" is-open="alertGrid">
+                            <accordion-heading ag-grid-resize watch="alertGrid" gridapi="alertGridOptions">
+                                Trends & Composition<span class="pull-right"><i class="pull-right glyphicon"
+                                                                                     ng-class="{'glyphicon glyphicon-minus-sign': alertGrid, 'glyphicon glyphicon-plus-sign': !alertGrid}"></i></span>
+                            </accordion-heading>
+                        </accordion-group>
+                        </accordion>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="dm-page-footer">
+                <button class="btn btn-primary email-btn pull-left"><i class="glyphicon glyphicon-envelope"></i>&nbsp;EMAIL
+                </button>
+                &nbsp;&nbsp;
+                <button class="btn btn-primary save-btn pull-right" ng-click="saveSCInfo()"><i class="glyphicon glyphicon-ok-circle"></i>&nbsp;SAVE
+                </button>
+
+            </div>
+        </div>
+    </div>
+    <div ng-include src="'views/modules/reports/reportsRightBar.html'"></div>
+
+</div>

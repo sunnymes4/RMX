@@ -1,0 +1,130 @@
+<div class="row">
+    <div class="{{classForMainContent}}" id="an-page">
+        <div class="col-lg-12 hierarchy">
+            <div class="row">
+                <div class="col-md-11 col-sm-11">
+                    <h2 class="clr1 text-center">
+                        <span>Analytics</span>
+                    </h2>
+                </div>
+                <div class="col-md-1 col-sm-1">
+                    <a href="" ng-click="toggleSideBar()"><span class="col-view pull-right"><b><i
+                            class="fa fa-angle-double-right fa-2x"></i></b></span></a>
+                </div>
+            </div>
+            <div class="container-main pad-none" id="dmGrids">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 attribute">
+                    <div class="custom-accordion">
+                        <accordion close-others="true" >
+                        <accordion-group class="cursor-pointer" ng-init="recommenGrid = true" is-open="recommenGrid" >
+                            <accordion-heading ag-grid-resize watch="recommenGrid">
+                                Sales Analysis <span class="pull-right"><i class="pull-right glyphicon"
+                                                                       ng-class="{'glyphicon glyphicon-minus-sign': recommenGrid, 'glyphicon glyphicon-plus-sign': !recommenGrid}"></i></span>
+
+                            </accordion-heading>
+                            <nvd3-discrete-bar-chart
+                                    data="discreteBarData"
+                                    showXAxis="true"
+                                    showYAxis="true"
+                                    showValues="true"
+                                    showLegend="true"
+                                    width="800"
+                                    height="250"
+                                    >
+                            </nvd3-discrete-bar-chart>
+                            <!-- <nvd3 options="salesAnalysisChartOptions" id="exampleId" data="SABarChartData.salesAnalysis" color="colorFunction()"></nvd3> -->
+
+                        </accordion-group>
+                        <accordion-group class="cursor-pointer" is-open="assortmentRecommendations">
+                            <accordion-heading ag-grid-resize watch="assortmentRecommendations">
+                                Assortment Recommendations<span class="pull-right"><i class="pull-right glyphicon"
+                                                                   ng-class="{'glyphicon glyphicon-minus-sign': assortmentRecommendations, 'glyphicon glyphicon-plus-sign': !assortmentRecommendations}"></i></span>
+                            </accordion-heading>
+                            <nvd3-cumulative-line-chart
+                                    data="exampleData"
+                                    id="exampleId"
+                                    width="800"
+                                    height="250"
+                                    showXAxis="true"
+                                    showYAxis="true"
+                                    tooltips="true"
+                                    interactive="true"
+                                    x="xFunction()"
+                                    y="yFunction()"
+                                    color="colorFunction()"
+                                    isArea="true"
+                                    margin="{left:50,top:50,bottom:50,right:50}"
+                                    >
+                                <svg></svg>
+                            </nvd3-cumulative-line-chart>
+                        </accordion-group>
+                        <accordion-group class="cursor-pointer" is-open="promotionRecommendations">
+                            <accordion-heading ag-grid-resize watch="promotionRecommendations">
+                                Promotion Recommendations<span class="pull-right"><i class="pull-right glyphicon"
+                                                                                      ng-class="{'glyphicon glyphicon-minus-sign': promotionRecommendations, 'glyphicon glyphicon-plus-sign': !promotionRecommendations}"></i></span>
+                            </accordion-heading>
+
+                            <nvd3-line-chart
+                                data="promotionData"
+                                showXAxis="true"
+                                showYAxis="true"
+                                width="600"
+                                height="200"
+                                tooltips="true"
+                                useInteractiveGuideline="true"
+                                showLegend="true"
+                                legendColor="legendColorFunction()">
+                            </nvd3-line-chart>
+                            <!-- <div id="chart3">
+                                <svg style="display: block;"></svg>
+                            </div> -->
+                        </accordion-group>
+                        <accordion-group class="cursor-pointer" is-open="markdownRecommendations">
+                            <accordion-heading ag-grid-resize watch="markdownRecommendations">
+                                Markdown Recommendations<span class="pull-right"><i class="pull-right glyphicon"
+                                                                                     ng-class="{'glyphicon glyphicon-minus-sign': markdownRecommendations, 'glyphicon glyphicon-plus-sign': !markdownRecommendations}"></i></span>
+                            </accordion-heading>
+                            <nvd3-line-with-focus-chart
+                                data="markdownData"
+                                id="isAreaIndividualExample"
+                                legendColor= "markdownColorFunction()"
+                                x="xAttributeFunction()"
+                                y="yAttributeFunction()"
+                                margin="{left:80,top:50,bottom:30,right:50}"
+                                xAxisTickFormat="xAxisTickFormatFunction()">
+                                <svg></svg>
+                            </nvd3-line-with-focus-chart>
+                        </accordion-group>
+                        <accordion-group class="cursor-pointer" is-open="skuAnalysis">
+                            <accordion-heading ag-grid-resize watch="skuAnalysis">
+                                New SKU Analysis<span class="pull-right"><i class="pull-right glyphicon"
+                                                                                     ng-class="{'glyphicon glyphicon-minus-sign': skuAnalysis, 'glyphicon glyphicon-plus-sign': !skuAnalysis}"></i></span>
+                            </accordion-heading>
+                            <img src="assets/images/assortment-recom.jpg" class="img-responsive m-t-sm" width="100%"/>
+                        </accordion-group>
+                        <accordion-group class="cursor-pointer" is-open="trendsComposition">
+                            <accordion-heading ag-grid-resize watch="trendsComposition">
+                                Trends & Composition<span class="pull-right"><i class="pull-right glyphicon"
+                                                                                     ng-class="{'glyphicon glyphicon-minus-sign': trendsComposition, 'glyphicon glyphicon-plus-sign': !trendsComposition}"></i></span>
+                            </accordion-heading>
+                            <img src="assets/images/assortment-recom.jpg" class="img-responsive m-t-sm" width="100%"/>
+                        </accordion-group>
+                        </accordion>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="dm-page-footer">
+                <button class="btn btn-primary email-btn pull-left"><i class="glyphicon glyphicon-envelope"></i>&nbsp;EMAIL
+                </button>
+                &nbsp;&nbsp;
+                <button class="btn btn-primary save-btn pull-right" ng-click="saveSCInfo()"><i class="glyphicon glyphicon-ok-circle"></i>&nbsp;SAVE
+                </button>
+
+            </div>
+        </div>
+    </div>
+    <div ng-include src="'views/modules/reports/reportsRightBar.html'"></div>
+
+</div>

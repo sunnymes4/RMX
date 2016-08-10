@@ -1,0 +1,12 @@
+<nav class="navbar hierarhy-menu " role="navigation">
+    <ul class="nav navbar-nav">
+        <li><b>Hierarchy</b></li>
+        <li class="dropdown" ng-repeat="menuItem in menuList">
+            <a href='javascript:void(0)' class="dropdown-toggle" data-toggle="dropdown">{{menuItem.title}}<span
+                    class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href='javascript:void(0)' ng-repeat="dropDownItem in menuItem.dropDownList">{{dropDownItem}}</a></li>
+            </ul>
+        </li>
+    </ul>
+</nav>

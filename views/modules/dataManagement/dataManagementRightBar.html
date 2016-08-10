@@ -1,0 +1,78 @@
+<div class="side-bar-container  bg-right">
+    <div class="custom-accordion">
+        <accordion close-others="false" ng-init="workflowGrid = true">
+
+            <accordion-group class="cursor-pointer" is-open="workflowGrid">
+                <accordion-heading ag-grid-resize watch="workflowGrid" gridapi="workflowGridOptions">
+                    Work Flow Progress<span class="pull-right"><i class="pull-right glyphicon"
+                                                                  ng-class="{'glyphicon glyphicon-minus-sign': workflowGrid, 'glyphicon glyphicon-plus-sign': !workflowGrid}"></i></span>
+                </accordion-heading>
+                <!--<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">-->
+
+                <nav class="work-flow-grid-nav navbar dropdown-menu-right hierarhy-menu" role="navigation">
+                    <ul class="nav navbar-nav">
+
+                        <li class="dropdown">
+                            <a href='javascript:void(0)'  class="dropdown-toggle dm-right-bar-workflow-menu" title="{{workFlowSelectedDepartment.description}}" data-toggle="dropdown">{{workFlowSelectedDepartment.description}}<span
+                                    class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href='javascript:void(0)' ng-repeat="department in departmentList" ng-click="selectWorkFlowDepartment(department)">{{department.description}}</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href='javascript:void(0)' class="dropdown-toggle dm-right-bar-workflow-menu" title="{{workFlowSelectedCategory.description}}" data-toggle="dropdown">{{workFlowSelectedCategory.description}}<span
+                                    class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href='javascript:void(0)' ng-repeat="category in workFlowCategoryList" ng-click="selectWorkFlowCategory(category)">{{category.description}}</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href='javascript:void(0)' class="dropdown-toggle dm-right-bar-workflow-menu" title="{{workFlowSelectedSubCategory.description}}" data-toggle="dropdown">{{workFlowSelectedSubCategory.description}}<span
+                                    class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href='javascript:void(0)' ng-repeat="subCategory in workFlowSubCategoryList" ng-click="selectWorkFlowSubCategory(subCategory)">{{subCategory.description}}</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href='javascript:void(0)' class="dropdown-toggle dm-right-bar-workflow-menu" title="{{workFlowSelectedPlanogram.description}}" data-toggle="dropdown">{{workFlowSelectedPlanogram.description}}<span
+                                    class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href='javascript:void(0)' ng-repeat="planogram in workFlowPlanogramList" ng-click="selectWorkFlowPlanogram(planogram)">{{planogram.description}}</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+                <div ag-grid="workflowGridOptions" class="ag-marke dmGrid workflow" style="height: 200px;"></div>                        <!--</div>-->
+            </accordion-group>
+            <accordion-group class="cursor-pointer" is-open="recommenGrid">
+                <accordion-heading ag-grid-resize watch="recommenGrid" gridapi="recommendationGridOptions">
+                    Recommendations<span class="pull-right"><i class="pull-right glyphicon"
+                                                               ng-class="{'glyphicon glyphicon-minus-sign': recommenGrid, 'glyphicon glyphicon-plus-sign': !recommenGrid}"></i></span>
+                </accordion-heading>
+                <!--<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">-->
+
+                <!--</div>-->
+            </accordion-group>
+            <accordion-group class="cursor-pointer" is-open="alertGrid">
+                <accordion-heading ag-grid-resize watch="alertGrid" gridapi="alertGridOptions">
+                    Alerts<span class="pull-right"><i class="pull-right glyphicon"
+                                                      ng-class="{'glyphicon glyphicon-minus-sign': alertGrid, 'glyphicon glyphicon-plus-sign': !alertGrid}"></i></span>
+                </accordion-heading>
+                <!--<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">-->
+                <!--<div ag-grid="alertGridOptions" class="ag-marke dmGrid workflow" style="height: 200px;"></div>-->
+                <!--</div>-->
+            </accordion-group>
+            <accordion-group class="cursor-pointer" is-open="supportTicketsGrid" >
+                <accordion-heading ag-grid-resize watch="supportTicketsGrid" gridapi="supportTicketsGridOptions">
+                    Support Tickets<span class="pull-right"><i class="pull-right glyphicon"
+                                                               ng-class="{'glyphicon glyphicon-minus-sign': supportTicketsGrid, 'glyphicon glyphicon-plus-sign': !supportTicketsGrid}"></i></span>
+                </accordion-heading>
+                <!--<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">-->
+                <div ag-grid="supportTicketsGridOptions" class="ag-marke dmGrid workflow" style="height: 100px;"></div>
+                <!--</div>-->
+            </accordion-group>
+        </accordion>
+    </div>
+    <!--   Right section grid ends ---->
+</div>

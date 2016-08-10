@@ -1,0 +1,390 @@
+<div class="row" ng-click="!showTestVsCtrl ? showTestVsCtrl = false : showTestVsCtrl = true">
+    <div class="{{classForMainContent}}" id="sc-page">
+        <div class="col-lg-12 hierarchy">
+            <div class="row">
+                <div class="col-md-11 col-sm-11">
+                    <h2 class="clr1 text-center">
+                        <span>Pricing Console</span>
+                    </h2>
+                </div>
+                <div class="col-md-1 col-sm-1">
+                    <a href="" ng-click="toggleSideBar()"><span class="col-view pull-right"><b><i
+                            class="fa fa-angle-double-right fa-2x"></i></b></span></a>
+                </div>
+            </div>
+            <!--<hierarchy-nav menu-list="hierarchyMenuList" style-class-name="hierarchy"></hierarchy-nav>-->
+            <nav class="{{hierarchy}}" role="navigation">
+                <ul class="nav navbar-nav">
+                    <li><b>Hierarchy</b></li>
+                    <li class="dropdown">
+                        <a href='javascript:void(0)' class="dropdown-toggle" data-toggle="dropdown">{{selectedDepartment.description}}<span
+                                class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href='javascript:void(0)' ng-repeat="department in departmentList" ng-click="selectDepartment(department)">{{department.description}}</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href='javascript:void(0)' class="dropdown-toggle" data-toggle="dropdown">{{selectedCategory.description}}<span
+                                class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href='javascript:void(0)' ng-repeat="category in categoryList" ng-click="selectCategory(category)">{{category.description}}</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href='javascript:void(0)' class="dropdown-toggle" data-toggle="dropdown">{{selectedSubCategory.description}}<span
+                                class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href='javascript:void(0)' ng-repeat="subCategory in subCategoryList" ng-click="selectSubCategory(subCategory)">{{subCategory.description}}</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href='javascript:void(0)' class="dropdown-toggle" data-toggle="dropdown">{{selectedPlanogram.description}}<span
+                                class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href='javascript:void(0)' ng-repeat="planogram in planogramList" ng-click="selectPlanogram(planogram)">{{planogram.description}}</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="container-main pad-none" id="dmGrids">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 attribute">
+                    <nav class="navbar mar-none pc-relationship-menu" role="navigation">
+                        <ul class="nav navbar-nav">
+                            <li><a class="color-white relationship-title"><b>Relationship</b></a></li>
+                            <li><a href='javascript:void(0)' ng-click="showCanvasImage('assets/images/line-relation.jpg')">Line</a></li>
+                            <li><a href='javascript:void(0)' ng-click="showCanvasImage('assets/images/brand-relation.jpg')">Brand</a></li>
+                            <li><a href='javascript:void(0)' ng-click="showCanvasImage('assets/images/size-relation.jpg')">Size</a></li>
+                            <li><a href='javascript:void(0)' ng-click="showCanvasImage('assets/images/feature-relation.jpg')">Feature</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-lg-12 col-md-12 attribute">
+                    <nav class="navbar pc-attribute-menu mar-none" role="navigation">
+                        <div class="col-lg-2 col-md-2">
+                            <h4><b>Attributes</b></h4>
+                        </div>
+                        <div class="col-lg-10 col-md-10 pad-none">
+                            <ul class="nav navbar-nav">
+                                <li><a href='javascript:void(0)' ng-click="show = 8">New </a></li>
+                                <li><a href='javascript:void(0)' ng-click="show = 9">Top Sellers</a></li>
+                                <li><a href='javascript:void(0)' ng-click="show = 10">End of Life</a></li>
+                                <li><a href='javascript:void(0)' ng-click="show = 11">Slow Movers</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+                <!--        Zone dropdown section begins        -->
+                <div class="custom-container mar-none clear">
+                    <div class="custom-accordion">
+                        <accordion>
+                            <accordion-group class="cursor-pointer m-b-sm" is-open="isOpen">
+                                <accordion-heading>
+                                    Optimize Status<span class="pull-right"><i class="pull-right glyphicon"
+                                                                               ng-class="{'glyphicon glyphicon-minus-sign': isOpen, 'glyphicon glyphicon-plus-sign': !isOpen}"></i></span>
+                                </accordion-heading>
+                                <!--<div class="col-lg-12 col-md-12 col-sm-12 ">-->
+                                    <section class="pc-zone-dropdown-section clear pad-t-b">
+                                        <div class="col-lg-2 col-md-6 form-control1 bdr-r-none">
+                                            <label class="{{showSideBar ? 'col-lg-12 col-md-12 pad-none' : 'col-lg-5 col-md-12 pad-none'}}">Opt. Status</label>
+                                            <div class="{{showSideBar ? 'col-lg-12 col-md-12 pad-none' : 'col-lg-7 col-md-12 pad-none'}}">
+                                                <select class="form-control01" ng-model="PCInfo.input.optimizeStatus">
+                                                    <option value="" disabled>Select</option>
+                                                    <option value="1">Optimized</option>
+                                                    <option value="0">Unoptimized</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2 col-md-6 form-control1 bdr-r-none">
+                                            <label class="{{showSideBar ? 'col-lg-12 col-md-12 pad-none' : 'col-lg-5 col-md-12 pad-none'}}">Zone Aggr.</label>
+                                            <div class="{{showSideBar ? 'col-lg-12 col-md-12 pad-none' : 'col-lg-7 col-md-12 pad-none'}}">
+                                                <select class="form-control01" ng-model="PCInfo.input.zone" ng-options="zone.id as zone.code for zone in PCInfo.zoneList">
+                                                    <option value="" disabled>Select</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2 col-md-6 form-control1 bdr-r-none">
+                                            <label class="{{showSideBar ? 'col-lg-12 col-md-12 pad-none' : 'col-lg-5 col-md-12 pad-none'}}">Start Date</label>
+                                            <div class="{{showSideBar ? 'col-lg-12 col-md-12 pad-none' : 'col-lg-7 col-md-12 pad-none'}}">
+                                                <!--<input type="date" class="form-control01"/>-->
+
+                                                <div class="input-group date-picker">
+                                                    <input type="text" class="form-control01" datepicker-append-to-body="true"  ng-model="PCInfo.input.startDate" datepicker-popup="MM-dd-yyyy" name="date" is-open="Datestatus"/>
+                                                    <span class="input-group-btn">
+                                                         <button class="btn btn-save" ng-click="Datestatus = !Datestatus;"  >
+                                                             <i class="fa fa-calendar-o"></i>
+                                                         </button>
+                                                    </span>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2 col-md-6 form-control1 bdr-r-none">
+                                            <label class="{{showSideBar ? 'col-lg-12 col-md-12 pad-none' : 'col-lg-5 col-md-12 pad-none'}}">End Date</label>
+                                            <div class="{{showSideBar ? 'col-lg-12 col-md-12 pad-none' : 'col-lg-7 col-md-12 pad-none'}}">
+                                                <div class="input-group date-picker">
+                                                    <input type="text" class="form-control01" datepicker-append-to-body="true"   ng-model="PCInfo.input.endDate" datepicker-popup="MM-dd-yyyy" name="date" is-open="Datestatus1"/>
+                                <span class="input-group-btn">
+                                     <button class="btn btn-save" ng-click="Datestatus1 = !Datestatus1;">
+                                         <i class="fa fa-calendar-o"></i>
+                                     </button>
+                                </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-12 form-control1 bdr-r-none">
+                                            <label class="{{showSideBar ? 'col-lg-12 col-md-12 pad-none' : 'col-lg-5 col-md-12 pad-none'}}">Last Optimized Date</label>
+                                            <div class="{{showSideBar ? 'col-lg-12 col-md-12 pad-none' : 'col-lg-7 col-md-12 pad-none'}}">
+                                                <input type="text" class="form-control01" ng-model="PCInfo.runList[0].effectiveDate" disabled/>
+                                            </div>
+                                        </div>
+                                    </section>
+                                <!--</div>-->
+                            </accordion-group>
+                        </accordion>
+                    </div>
+                </div>
+            </div>
+            <!--        Zone dropdown section ends        -->
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="plano-price-change">
+                        <input type="radio" name="price" class="custom-radio-button" ng-click="showPrice(defaultPriceOption)" ng-model="defaultPriceOption" value="1" /><span class="lbl padding-8"> </span>
+                        <label>Show C.P</label>
+                        <input type="radio" name="price" class="custom-radio-button" ng-click="showPrice(defaultPriceOption)" ng-model="defaultPriceOption" value="2" /><span class="lbl padding-8"> </span>
+                        <label>Show O.P</label>
+                        <input type="radio" name="price" class="custom-radio-button" ng-click="showPrice(defaultPriceOption)" ng-model="defaultPriceOption" value="0" /><span class="lbl padding-8"> </span>
+                        <label>Show Both <span>(C.P & O.P)</span></label>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <!--<section style="margin-bottom:10px;">-->
+                        <!--<img src="assets/images/default-plano.jpg" ng-show="show==7" class="img-responsive" />-->
+                        <!--<img src="assets/images/cp-plano.jpg" ng-show="show==5" class="img-responsive"/>-->
+                        <!--<img src="assets/images/op-plano.jpg" ng-show="show==6" class="img-responsive"/>-->
+                        <!--<img src="assets/images/line-relation.jpg" ng-show="show==1" class="img-responsive" />-->
+                        <!--<img src="assets/images/brand-relation.jpg" ng-show="show==2" class="img-responsive"/>-->
+                        <!--<img src="assets/images/size-relation.jpg" ng-show="show==3" class="img-responsive"/>-->
+                        <!--<img src="assets/images/feature-relation.jpg" ng-show="show==4" class="img-responsive"/>-->
+                    <!--</section>-->
+                    <canvas id="pricingConsoleCanvas" class="img-responsive" width="1150" height="472" style="border:1px solid #000000;margin-bottom:10px;">
+                        Your browser does not support the HTML5 canvas tag.
+                    </canvas>
+                </div>
+                <div class="row custom-container mar-none">
+                    <div class="custom-accordion">
+                        <accordion>
+                        <accordion-group class="cursor-pointer m-b-sm" is-open="isOpen" ng-click="refreshSlider()">
+                            <accordion-heading>
+                                Category Constraints<span class="pull-right"><i class="pull-right glyphicon"
+                                                                                ng-class="{'glyphicon glyphicon-minus-sign': isOpen, 'glyphicon glyphicon-plus-sign': !isOpen}"></i></span>
+                            </accordion-heading>
+                            <div class="row custom-container custom-range-slider pad-none">
+                                <div class="col-lg-12 col-md-12 col-sm-12 pad-none scenario m-t-sm pad-b-sm">
+                                    <div class="{{showSideBar ? 'col-lg-3 col-md-12 pad-none scenario-head2 scenario-head pad-t-sm' : 'col-lg-3 col-md-12 pad-none scenario-head'}}">
+                                        <label class=" pad-r-l5">Scenario Management</label>
+                                    </div>
+                                    <div class="col-lg-2 col-md-6 col-sm-6 pad-r-l5 form-control1 bdr-r-none scenario-drop-menu">
+                                        <label class="{{showSideBar ? 'col-lg-12 col-md-12 pad-none' : 'col-lg-5 col-md-12 pad-none'}}">Goal</label>
+                                        <div class="{{showSideBar ? 'col-lg-12 col-md-12 pad-none m-b-sm' : 'col-lg-7 col-md-12 pad-none'}}">
+                                            <select class="form-control01" ng-model="PCInfo.input.goal" ng-options="goal.id as goal.code for goal in goalList">
+                                                <option value="" disabled>Select</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 col-md-6 col-sm-6 pad-r-l5 form-control1 bdr-r-none scenario-drop-menu">
+                                        <label class="{{showSideBar ? 'col-lg-12 col-md-12 pad-none' : 'col-lg-5 col-md-12 pad-none'}}">Bounds</label>
+
+                                        <div class="{{showSideBar ? 'col-lg-12 col-md-12 pad-none m-b-sm' : 'col-lg-7 col-md-12 pad-none'}}">
+                                            <select class="form-control01" ng-model="PCInfo.input.bound" ng-options="bound.id as bound.code for bound in boundList">
+                                                <option value="" disabled>Select</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 col-md-6 col-sm-6 pad-r-l5 form-control1 bdr-r-none scenario-drop-menu">
+                                        <label class="{{showSideBar ? 'col-lg-12 col-md-12 pad-none' : 'col-lg-7 col-md-12 pad-none'}}">Target CPI</label>
+                                        <div class="{{showSideBar ? 'col-lg-12 col-md-12 pad-none m-b-sm' : 'col-lg-5 col-md-12 pad-none'}}">
+                                            <select class="form-control01" ng-model="PCInfo.input.targetCpi"
+                                                    ng-options="bound.id as bound.code for bound in PCInfo.targetCPI">
+                                                <option value="" disabled>Select</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-6 pad-r-l5 form-control1 bdr-r-none mar-btm-sm scenario-drop-menu">
+                                        <label class="{{showSideBar ? 'col-lg-12 col-md-12 pad-none' : 'col-lg-7 col-md-12 pad-none'}}">Margin Rule</label>
+                                        <div class="{{showSideBar ? 'col-lg-12 col-md-12 pad-none m-b-sm' : 'col-lg-5 col-md-12 pad-none'}}">
+                                            <select class="form-control01" ng-model="PCInfo.input.marginRule"
+                                                    ng-options="bound.id as bound.code for bound in PCInfo.marginRule">
+                                                <option value="" disabled>Select</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 pad-none clear">
+                                    <div class="{{showSideBar ? 'col-lg-6 col-md-12 col-sm-6' : 'col-lg-3 col-md-3 col-sm-6'}}">
+                                        <div class="priceRangeSlider">
+                                            <br>
+                                            <h5 class="color-white">Overall Price Change </h5>
+                                            <rzslider rz-slider-model="rangeSlider.overallPriceChangeSlider.minValue"
+                                                      rz-slider-high="rangeSlider.overallPriceChangeSlider.maxValue"
+                                                      rz-slider-options="rangeSlider.overallPriceChangeSlider.options"></rzslider>
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <div class="{{showSideBar ? 'col-lg-6 col-md-12 col-sm-6' : 'col-lg-3 col-md-3 col-sm-6'}}">
+                                        <div class="volumeChangeSlider">
+                                            <br>
+                                            <h5 class="color-white">Overall Volume Change Limits </h5>
+                                            <rzslider rz-slider-model="rangeSlider.overallVolumeChangeSlider.minValue"
+                                                      rz-slider-high="rangeSlider.overallVolumeChangeSlider.maxValue"
+                                                      rz-slider-options="rangeSlider.overallVolumeChangeSlider.options"></rzslider>
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <div class="{{showSideBar ? 'col-lg-6 col-md-12 col-sm-6' : 'col-lg-3 col-md-3 col-sm-6'}}">
+                                        <div class="productPriceChangeSlider">
+                                            <br>
+                                            <h5 class="color-white">Product - Price Change Limits</h5>
+                                            <rzslider rz-slider-model="rangeSlider.productPriceChangeSlider.minValue"
+                                                      rz-slider-high="rangeSlider.productPriceChangeSlider.maxValue"
+                                                      rz-slider-options="rangeSlider.productPriceChangeSlider.options"></rzslider>
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <div class="{{showSideBar ? 'col-lg-6 col-md-12 col-sm-6' : 'col-lg-3 col-md-3 col-sm-6'}}">
+                                        <div class="productVolumeChangeSlider">
+                                            <br>
+                                            <h5 class="color-white">Product - Volume Change Limits</h5>
+                                            <rzslider rz-slider-model="rangeSlider.productVolumeChangeSlider.minValue"
+                                                      rz-slider-high="rangeSlider.productVolumeChangeSlider.maxValue"
+                                                      rz-slider-options="rangeSlider.productVolumeChangeSlider.options"></rzslider>
+                                        </div>
+                                        <br>
+                                    </div>
+                                </div>
+                            </div>
+                        </accordion-group>
+                        </accordion>
+
+                    </div>
+                </div>
+                <div class="{{showSideBar ? 'col-lg-12 col-md-12 optimize-all-btns-two-column m-b-sm' : 'col-lg-12 m-b-sm clear optimize-all-btns'}}">
+                    <button class="btn-optimize" ng-click="saveOptimizeResults()" ng-disabled="!selectedPlanogram.id">Optimize All</button>
+                    <button class="btn-optimize" >Optimize Unlocked</button>
+                    <button class="btn-optimize" ng-click="exportPlanogram()">Export Planogram</button>
+                    <button class="btn-optimize"  ng-click="showRequestApprovalFunc(blLogicGrid)">Request Approval</button>
+                    <button class="btn-optimize"  ng-click="showTestVsCtrlFunc(blLogicGrid)">Test Vs Control</button>
+                    <button class="btn-save p-xxs pull-right" ng-click="savePCInfo()">Save</button>
+                </div>
+                <div class="row custom-container mar-none clear">
+                    <div class="custom-accordion">
+                        <accordion close-others="false">
+                            <accordion-group class="cursor-pointer" is-open="blLogicGrid.open" ng-click="hideBoth()">
+                                <accordion-heading>
+                                    Optimize Results<span class="pull-right"><i class="pull-right glyphicon"
+                                                                               ng-class="{'glyphicon glyphicon-minus-sign': blLogicGrid.open, 'glyphicon glyphicon-plus-sign': !blLogicGrid.open}"></i></span>
+                                </accordion-heading>
+                                <div class="row">
+                                    <div class="custom-container  pad-none">
+                                        <div ag-grid="runIdGridOptions" class="ag-marke runId" style="height: 200px;"></div>
+                                    </div>
+                                </div>
+                    </accordion-group>
+                    </accordion>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="custom-container position-absolute" aria-expanded="true" ng-blur="showRequestApproval = false"  ng-show="showRequestApproval">
+                    <div ag-grid="requestApprovalGridOptions" class="ag-marke runId " style="height: 200px;"></div>
+                    <button class="btn-save p-xxs pull-right" ng-click="showRequestApproval = false">Email</button>
+                    <button class="btn-save p-xxs pull-right" ng-click="showRequestApproval = false">Cancel</button>
+
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 testControlPopup" ng-model="testControl"  ng-blur="showTestVsCtrl = false"  ng-show="showTestVsCtrl">
+                    <section class="pc-zone-dropdown-section clear pad-t-sm pad-b-sm">
+                        <div class="col-lg-12 pad-none">
+                            <div class="col-lg-6 col-md-6 form-control1 bdr-r-none">
+                                <label class="col-lg-4 col-md-12 pad-none"># of Stores</label>
+                                <div class="col-lg-8 col-md-12 pad-none">
+                                    <select class="form-control01">
+                                        <option>10</option>
+                                        <option>20</option>
+                                        <option>30</option>
+                                        <option>40</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 form-control1 bdr-r-none">
+                                <label class="col-lg-4 col-md-12 pad-none">Universe</label>
+                                <div class="col-lg-8 col-md-12 pad-none">
+                                    <select class="form-control01">
+                                        <option>All Zone</option>
+                                        <option>Zone 01</option>
+                                        <option>Zone 02</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 pad-none">
+                            <div class="col-lg-6 col-md-6 form-control1 bdr-r-none">
+                                <label class="col-lg-4 col-md-12 pad-none">Start Date</label>
+                                <div class="col-lg-8 col-md-12 pad-none">
+                                    <div class="input-group date-picker">
+                                        <input type="text" class="form-control01" datepicker-append-to-body="true"  ng-model="PCInfo.input.startDate" datepicker-popup="MM-dd-yyyy" name="date" is-open="startDateTestCtrl"/>
+                                        <span class="input-group-btn">
+                                             <button class="btn btn-save" ng-click="startDateTestCtrl = !startDateTestCtrl;"   style="position: relative!important; z-index: 100000!important;">
+                                                 <i class="fa fa-calendar-o"></i>
+                                             </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 form-control1 bdr-r-none">
+                                <label class="col-lg-4 col-md-12 pad-none">End Date</label>
+                                <div class="col-lg-8 col-md-12 pad-none">
+                                    <div class="input-group date-picker">
+                                        <input type="text" class="form-control01" datepicker-append-to-body="true"  ng-model="PCInfo.input.endDate" datepicker-popup="MM-dd-yyyy" name="date" is-open="endDateTestCtrl"/>
+                                        <span class="input-group-btn">
+                                             <button class="btn btn-save" ng-click="endDateTestCtrl = !endDateTestCtrl;"   style="position: relative!important; z-index: 100000!important;">
+                                                 <i class="fa fa-calendar-o"></i>
+                                             </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 pad-none">
+                            <div class="col-lg-6 col-md-12 form-control1 bdr-r-none">
+                                <label class="col-lg-4 col-md-12 pad-none">Notify</label>
+                                <div class="col-lg-8 col-md-12 pad-none">
+                                    <select class="form-control01">
+                                        <option>Email</option>
+                                        <option>abc@gmail.com</option>
+                                        <option>Zone@bix.com</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12 form-control1 bdr-r-none">
+                                <button class="btn-save" ng-click="showTestVsCtrl = false">Cancel</button>
+                                <button class="btn-save">Run</button>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="dm-page-footer">
+            <button class="btn btn-primary email-btn pull-left" ng-click="sendEmail()"><i class="glyphicon glyphicon-envelope"></i>&nbsp;EMAIL
+            </button>
+            &nbsp;&nbsp;
+            <button class="btn btn-primary save-btn pull-right"><i class="glyphicon glyphicon-ok-circle"></i>&nbsp;SAVE
+            </button>
+        </div>
+    </div>
+    <div ng-include src="'views/pricingConsoleRightBar.html'"></div>
+</div>

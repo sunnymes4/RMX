@@ -1,0 +1,160 @@
+<div class="row">
+    <div class="{{classForMainContent}}" id="rs-page">
+        <div class="col-lg-12 hierarchy">
+            <div class="row">
+                <div class="col-md-11 col-sm-11">
+                    <h2 class="clr1 text-center">
+                        <span>Reports</span>
+                    </h2>
+                </div>
+                <div class="col-md-1 col-sm-1">
+                    <a href="" ng-click="toggleSideBar()"><span class="col-view pull-right"><b><i
+                            class="fa fa-angle-double-right fa-2x"></i></b></span></a>
+                </div>
+            </div>
+            <div class="container-main pad-none" id="dmGrids">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 attribute">
+                    <div class="custom-accordion">
+                        <accordion close-others="false" >
+                        <accordion-group class="cursor-pointer" ng-init="recommenGrid = true" is-open="recommenGrid" >
+                            <accordion-heading ag-grid-resize watch="recommenGrid" gridapi="recommendationGridOptions">
+                                Scenario Results <span class="pull-right"><i class="pull-right glyphicon"
+                                                                       ng-class="{'glyphicon glyphicon-minus-sign': recommenGrid, 'glyphicon glyphicon-plus-sign': !recommenGrid}"></i></span>
+
+                            </accordion-heading>
+                            <!-- <img src="assets/images/scenario-result.jpg" class="img-responsive" width="100%"/> -->
+                            <table class="table table-bordered report-scenario-results">
+                                <thead>
+                                  <tr>
+                                    <th rowspan="2">
+                                    </th >
+                                    <th rowspan="2">
+                                        Report Type
+                                    </th>
+                                    <th colspan="2">
+                                        Aggregation Level
+                                    </th>
+                                    <th rowspan="2">
+                                        Output
+                                    </th>
+                                  </tr>
+                                  <tr>
+                                    <th>
+                                        Prod Hierachy
+                                    </th>
+                                    <th>
+                                        Store Hierachy
+                                    </th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td rowspan="5">
+                                        Select Options
+                                    </td>
+                                    <td>
+                                        <a href="#">Scenario Summary</a>
+                                    </td>
+                                    <td>
+                                        <a href="#">Products</a>
+                                    </td>
+                                    <td>
+                                        <a href="#">Store</a>
+                                    </td>
+                                    <td>
+                                        <a href="#"><i class="fa fa-eye view"></i> Store</a>
+                                    </td>
+                                  </tr>
+                                  <tr>
+
+                                    <td>
+                                        <a href="#">Scenario Results</a>
+                                    </td>
+                                    <td>
+                                        <a href="#">Category</a>
+                                    </td>
+                                    <td>
+                                        <a href="#">Zone</a>
+                                    </td>
+                                    <td>
+                                        <a href="#"><i class="fa fa-file-excel-o excel"></i> Excel</a>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td>
+                                        <a href="#">Competitive</a>
+                                    </td>
+                                    <td>
+                                        <a href="#">Chain</a>
+                                    </td>
+                                    <td>
+                                        <a href="#">Chain</a>
+                                    </td>
+                                    <td>
+                                          <a href="#"><i class="fa fa-file-pdf-o pdf"></i> PDF</a>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td>
+                                        <a href="#">Price Change </a>
+                                    </td>
+                                    <td>
+                                        <a href="#">Brand</a>
+                                    </td>
+                                    <td>
+                                        <a href="#"></a>
+                                    </td>
+                                    <td>
+                                          <a href="#"><i class="fa fa-newspaper-o presentation"></i> Presentation</a>
+                                    </td>
+                                  </tr>
+
+                                  <tr>
+                                    <td>
+                                        <a href="#">Relationship</a>
+                                    </td>
+                                    <td>
+                                        <a href="#"></a>
+                                    </td>
+                                    <td>
+                                        <a href="#"></a>
+                                    </td>
+                                    <td>
+                                          <a href="#"><i class="fa fa-envelope-o view"></i> Email</a>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                            </table>
+                        </accordion-group>
+                        <accordion-group class="cursor-pointer"  ng-init="alertGrid = true" is-open="alertGrid">
+                            <accordion-heading ag-grid-resize watch="alertGrid" gridapi="alertGridOptions">
+                                Performance Reports<span class="pull-right"><i class="pull-right glyphicon"
+                                                                   ng-class="{'glyphicon glyphicon-minus-sign': alertGrid, 'glyphicon glyphicon-plus-sign': !alertGrid}"></i></span>
+                            </accordion-heading>
+                            <!-- <nvd3 options="cumulativeLineChartOptions" data="SCBarChartData.revenues"></nvd3> -->
+                            <div id="chart1">
+                                <svg style="display: block;"></svg>
+                            </div>
+                            <!-- <bars id="chart" data="40,4,55,15,16,33,52,20"></bars> -->
+                            <!-- <img src="assets/images/performance-report.jpg" class="img-responsive m-t-sm" width="100%"/> -->
+
+                        </accordion-group>
+                        </accordion>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="dm-page-footer">
+                <button class="btn btn-primary email-btn pull-left"><i class="glyphicon glyphicon-envelope"></i>&nbsp;EMAIL
+                </button>
+                &nbsp;&nbsp;
+                <button class="btn btn-primary save-btn pull-right" ng-click="saveSCInfo()"><i class="glyphicon glyphicon-ok-circle"></i>&nbsp;SAVE
+                </button>
+
+            </div>
+        </div>
+    </div>
+    <div ng-include src="'views/reportsRightBar.html'"></div>
+
+</div>

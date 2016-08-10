@@ -1,0 +1,147 @@
+<div class="col-lg-4 col-md-4 col-sm-12 pad-none-left small-screen" ng-show="showSideBar" id="dmSideBar">
+    <div class="side-bar-container  bg-right">
+        <div class="custom-accordion">
+            <accordion close-others="false" ng-init="workflowGrid = true">
+
+                <accordion-group class="cursor-pointer" is-open="workflowGrid">
+                    <accordion-heading ag-grid-resize watch="workflowGrid" gridapi="workflowGridOptions">
+                        Item Details<span class="pull-right"><i class="pull-right glyphicon"
+                                                                ng-class="{'glyphicon glyphicon-minus-sign': workflowGrid, 'glyphicon glyphicon-plus-sign': !workflowGrid}"></i></span>
+                    </accordion-heading>
+                    <!--<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">-->
+                    <!--<div ag-grid="workflowGridOptions" class="ag-marke dmGrid workflow" style="height: 200px;"></div>                        &lt;!&ndash;</div>&ndash;&gt;-->
+                    <div class="col-lg-12 itemDetail pad-none">
+                        <h2>SKU<span class="pull-right">Product Description</span></h2>
+
+                        <div class="col-lg-12 pad-none">
+                            <img src="assets/images/item-detail-graph.jpg" class="img-responsive"/>
+
+                            <section>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <button ng-click="toggleDumPopup()" class="btn-popup pc-right-bar-opt-btn pull-right">Export</button>
+                                    <button ng-click="toggleDumPopup()" class="btn-popup pc-right-bar-opt-btn pull-right">Save</button>
+                                    <button ng-click="toggleDumPopup()" class="btn-popup pc-right-bar-opt-btn pull-right">Email</button>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-6 pad-t-sm">
+                                    <select class="form-control01" ng-model="selectedProduct.zone"
+                                            ng-options="zone.id as zone.code for zone in PCInfo.zoneList">
+                                        <option value="" disabled>Select Zone</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 pad-t-sm">
+                                    <div class="input-group date-picker">
+                                        <input type="text" class="form-control01" datepicker-append-to-body="true" placeholder="Start Date"
+                                               datepicker-append-to-body="true"  ng-model="selectedProduct.startDate" datepicker-popup="MM-dd-yyyy" name="date" is-open="skuStartDate"/>
+                                        <span class="input-group-btn">
+                                             <button class="btn btn-save" ng-click="skuStartDate = !skuStartDate;"   style="position: relative!important; z-index: 100000!important;">
+                                                 <i class="fa fa-calendar-o"></i>
+                                             </button>
+                                        </span>
+                                    </div>
+                                    <!--<input type="text" class="form-control01" datepicker-append-to-body="true"-->
+                                           <!--placeholder="Start Date"-->
+                                           <!--ng-model="selectedProduct.startDate" datepicker-popup="dd-MM-yyyy" name="date"-->
+                                           <!--is-open="skuStartDate" ng-click="skuStartDate = !skuStartDate;"/>-->
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-12  pad-t-sm">
+                                    <div class="input-group date-picker">
+                                        <input type="text" class="form-control01" datepicker-append-to-body="true" placeholder="End Date"
+                                               datepicker-append-to-body="true"  ng-model="selectedProduct.endDate" datepicker-popup="MM-dd-yyyy" name="date" is-open="skuEndDate"/>
+                                        <span class="input-group-btn">
+                                             <button class="btn btn-save" ng-click="skuEndDate = !skuEndDate;"   style="position: relative!important; z-index: 100000!important;">
+                                                 <i class="fa fa-calendar-o"></i>
+                                             </button>
+                                        </span>
+                                    </div>
+                                    <!--<input type="text" class="form-control01" datepicker-append-to-body="true"-->
+                                           <!--placeholder="End Date"-->
+                                           <!--ng-model="selectedProduct.endDate" datepicker-popup="dd-MM-yyyy" name="date"-->
+                                           <!--is-open="skuEndDate" ng-click="skuEndDate = !skuEndDate;"/>-->
+                                </div>
+                            </div>
+                                <div class="scatter-chart-container item-data ">
+                                    <div class="col-lg-7 col-md-7 col-sm-12 pad-r-l5 pad-t-sm custom-range-slider">
+                                        <rzslider rz-slider-model="rightBarSlider.value"
+                                                  rz-slider-options="rightBarSlider.options"></rzslider>
+                                    </div>
+                                    <div class="col-lg-5 col-md-5 col-sm-12 pad-r-l5 pad-t-sm sidebar-optimize-section text-center">
+                                        <div class="row custom-container">
+                                            <span>$ {{rightBarSlider.value}}</span><br>
+                                        </div>
+                                        <p ng-init="locked"><i ng-click="locked = !locked"  class="{{locked ? 'fa fa-lock' : 'fa fa-unlock'}}"></i>
+                                            <!--<button class="btn-save pc-right-bar-opt-btn pull-right" ng-disabled="!selectedPlanogram.id" ng-click="optimizeSKU()">Optimize</button>-->
+                                            <button class="btn-save pc-right-bar-opt-btn pull-right" ng-click="enableSlider()">Optimize</button>
+                                        </p>
+                                    </div>
+                                </div>
+
+                            </section>
+                        </div>
+                    </div>
+                </accordion-group>
+                <accordion-group class="cursor-pointer" is-open="recommenGrid">
+                    <accordion-heading ag-grid-resize watch="recommenGrid" gridapi="recommendationGridOptions">
+                        Competition<span class="pull-right"><i class="pull-right glyphicon"
+                                                               ng-class="{'glyphicon glyphicon-minus-sign': recommenGrid, 'glyphicon glyphicon-plus-sign': !recommenGrid}"></i></span>
+                    </accordion-heading>
+
+                </accordion-group>
+                <accordion-group class="cursor-pointer" is-open="alertGrid">
+                    <accordion-heading ag-grid-resize watch="alertGrid" gridapi="alertGridOptions">
+                        Weather<span class="pull-right"><i class="pull-right glyphicon"
+                                                           ng-class="{'glyphicon glyphicon-minus-sign': alertGrid, 'glyphicon glyphicon-plus-sign': !alertGrid}"></i></span>
+                    </accordion-heading>
+
+                </accordion-group>
+                <accordion-group class="cursor-pointer" is-open="markdown">
+                    <accordion-heading ag-grid-resize watch="markdown" gridapi="markdownOptions">
+                        Markdown<span class="pull-right"><i class="pull-right glyphicon"
+                                                            ng-class="{'glyphicon glyphicon-minus-sign': markdown, 'glyphicon glyphicon-plus-sign': !markdown}"></i></span>
+                    </accordion-heading>
+
+                </accordion-group>
+                <accordion-group class="cursor-pointer" is-open="promotion">
+                    <accordion-heading ag-grid-resize watch="promotion" gridapi="recommendationGridOptions">
+                        Promotion<span class="pull-right"><i class="pull-right glyphicon"
+                                                             ng-class="{'glyphicon glyphicon-minus-sign': promotion, 'glyphicon glyphicon-plus-sign': !promotion}"></i></span>
+                    </accordion-heading>
+
+                </accordion-group>
+                <accordion-group class="cursor-pointer" is-open="react">
+                    <accordion-heading ag-grid-resize watch="react" gridapi="reactOptions">
+                        React to Traffic<span class="pull-right"><i class="pull-right glyphicon"
+                                                                    ng-class="{'glyphicon glyphicon-minus-sign': react, 'glyphicon glyphicon-plus-sign': !react}"></i></span>
+                    </accordion-heading>
+
+                </accordion-group>
+                <accordion-group class="cursor-pointer" is-open="textControl">
+                    <accordion-heading ag-grid-resize watch="textControl" gridapi="textControlOptions">
+                        Individual Test vs Control<span class="pull-right"><i class="pull-right glyphicon"
+                                                                              ng-class="{'glyphicon glyphicon-minus-sign': textControl, 'glyphicon glyphicon-plus-sign': !textControl}"></i></span>
+                    </accordion-heading>
+
+                </accordion-group>
+                <accordion-group class="cursor-pointer" is-open="modelFit">
+                    <accordion-heading ag-grid-resize watch="modelFit" gridapi="modelFitOptions">
+                        Model Fit/Accuracy<span class="pull-right"><i class="pull-right glyphicon"
+                                                                      ng-class="{'glyphicon glyphicon-minus-sign': modelFit, 'glyphicon glyphicon-plus-sign': !modelFit}"></i></span>
+                    </accordion-heading>
+                    <!--<img src="assets/images/model-graph.png" class="img-responsive"/>-->
+
+                </accordion-group>
+            </accordion>
+            <div class="row">
+                <div class="custom-container email-absolute" aria-expanded="true"  ng-show="dumPopup">
+                    <h1> This is Email Message.</h1>
+                    <button class="btn-save p-xxs pull-right" ng-click="toggleDumPopup()">OK</button>
+
+                </div>
+            </div>
+        </div>
+        <!--   Right section grid ends ---->
+    </div>
+</div>

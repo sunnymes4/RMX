@@ -1,0 +1,164 @@
+<div class="row">
+    <div class="{{classForMainContent}}" id="dm-page">
+        <div class="col-lg-12 hierarchy">
+            <div class="row">
+                <div class="col-md-11 col-sm-11">
+                    <h2 class="clr1 text-center">
+                        <span>Data Management</span>
+                    </h2>
+                </div>
+                <div class="col-md-1 col-sm-1">
+                    <a href="" ng-click="toggleSideBar()"><span class="col-view pull-right"><b><i
+                            class="fa fa-angle-double-right fa-2x"></i></b></span></a>
+                </div>
+            </div>
+            <!--<hierarchy-nav menu-list="hierarchyMenuList" style-class-name="hierarchy"></hierarchy-nav>-->
+            <nav class="{{classForMainContent == 'col-lg-12' && showSideBar == true ? 'navbar hierarchy-menu' : 'navbar hierarchy-menu hierarchy-menu-right'}}" role="navigation">
+                <ul class="nav navbar-nav">
+                    <li><b>Hierarchy</b></li>
+                    <li class="dropdown">
+                        <a href='javascript:void(0)' class="dropdown-toggle" title="{{selectedDepartment.description}}" data-toggle="dropdown">{{selectedDepartment.description}}<span
+                                class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href='javascript:void(0)' ng-repeat="department in departmentList" ng-click="selectDepartment(department)">{{department.description}}</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href='javascript:void(0)' class="dropdown-toggle" title="{{selectedCategory.description}}" data-toggle="dropdown">{{selectedCategory.description}}<span
+                                class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href='javascript:void(0)' ng-repeat="category in categoryList" ng-click="selectCategory(category)">{{category.description}}</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href='javascript:void(0)' class="dropdown-toggle" title="{{selectedSubCategory.description}}" data-toggle="dropdown">{{selectedSubCategory.description}}<span
+                                class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href='javascript:void(0)' ng-repeat="subCategory in subCategoryList" ng-click="selectSubCategory(subCategory)">{{subCategory.description}}</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href='javascript:void(0)' class="dropdown-toggle" title="{{selectedPlanogram.description}}" data-toggle="dropdown">{{selectedPlanogram.description}}<span
+                                class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href='javascript:void(0)' ng-repeat="planogram in planogramList" ng-click="selectPlanogram(planogram)">{{planogram.description}}</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="container-main" id="dmGrids">
+            <div class="row">
+                <div class="col-lg-2 col-md-2">
+                    <h3 class="text-center margin-top-12 color-white">Attributes</h3>
+                </div>
+                <div class="col-lg-10 col-md-10 attribute">
+                    <nav class="{{attributeClass}}" role="navigation">
+                        <ul class="nav navbar-nav">
+                            <li><a ng-class="{'attr-type-btn': activeAttrType ==  'lineClass'}" ng-click="activateRelationshipType('lineClass')">Line</a></li>
+                            <li><a ng-class="{'attr-type-btn': activeAttrType ==  'brandMatch'}" ng-click="activateRelationshipType('brandMatch')">Brand</a></li>
+                            <li><a ng-class="{'attr-type-btn': activeAttrType ==  'sizeMatch'}" ng-click="activateRelationshipType('sizeMatch')">Size</a></li>
+                            <li><a ng-class="{'attr-type-btn': activeAttrType ==  'featureMatch'}" ng-click="activateRelationshipType('featureMatch')">Feature</a></li>
+                            <li><a ng-class="{'attr-type-btn': activeAttrType ==  'shoppingCriteria'}" ng-click="activateShoppingCriteria()">Shopping Criteria</a></li>
+                            <li><a ng-class="{'attr-type-btn': activeAttrType ==  'brandHierarchy'}" ng-click="activateBrandHierarchy()">Brand Hierarchy</a></li>
+                            <li><a><span class="fa fa-angle-right"></span></a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="row relationshipGrid" ng-if="showRelationshipGrid" >
+                <div class="custom-container">
+                    <div ag-grid="PRGridOptions" class="ag-marke dmGrid" style="height: 200px;"></div>
+                </div>
+            </div>
+            <div class="row relationshipGrid" ng-if="!showRelationshipGrid">
+                <div class="custom-container">
+                    <div ag-grid="PRCriteriaGridOptions" class="ag-marke dmGrid" style="height: 200px;"></div>
+                </div>
+            </div>
+            <br>
+
+            <div class="row">
+                <div class="custom-container custom-accordion borrowing">
+                    <accordion close-others="false">
+                        <accordion-group class="cursor-pointer" is-open="blLogicGrid">
+                            <accordion-heading ag-grid-resize watch="blLogicGrid" gridapi="borrowingLogicOptions">
+                                Borrowing Logic<span class="pull-right"><i class="pull-right glyphicon"
+                                                                           ng-class="{'glyphicon glyphicon-minus-sign': blLogicGrid, 'glyphicon glyphicon-plus-sign': !blLogicGrid}"></i></span>
+                            </accordion-heading>
+                            <!--<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">-->
+                            <div ag-grid="borrowingLogicOptions" class="ag-marke dmGrid" ng-style="{ height: borrowingLogicGridHeight}"></div>
+                            <!--</div>-->
+                        </accordion-group>
+                        <accordion-group class="cursor-pointer" is-open="weatherGrid">
+                            <accordion-heading ag-grid-resize watch="weatherGrid" gridapi="weatherGridOptions">
+                                Weather<span class="pull-right"><i class="pull-right glyphicon"
+                                                                   ng-class="{'glyphicon glyphicon-minus-sign': weatherGrid, 'glyphicon glyphicon-plus-sign': !weatherGrid}"></i></span>
+                            </accordion-heading>
+                            <!--<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">-->
+                            <div ag-grid="weatherGridOptions" class="ag-marke dmGrid" style="height: 65px;"></div>
+                            <!--</div>-->
+                        </accordion-group>
+                        <accordion-group class="cursor-pointer" is-open="trafficDemoGrid">
+                            <accordion-heading ag-grid-resize watch="trafficDemoGrid" gridapi="trafficGridOptions">
+                                Traffic Demographics<span class="pull-right"><i class="pull-right glyphicon"
+                                                                                ng-class="{'glyphicon glyphicon-minus-sign': trafficDemoGrid, 'glyphicon glyphicon-plus-sign': !trafficDemoGrid}"></i></span>
+                            </accordion-heading>
+                            <!--<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">-->
+                            <div ag-grid="trafficGridOptions" class="ag-marke dmGrid" style="height: 65px;"></div>
+                            <!--</div>-->
+                        </accordion-group>
+
+                        <accordion-group class="cursor-pointer" is-open="socialMediaGrid">
+                            <accordion-heading ag-grid-resize watch="socialMediaGrid" gridapi="socialMediaGridOptions">
+                                Social Media<span class="pull-right"><i class="pull-right glyphicon"
+                                                                   ng-class="{'glyphicon glyphicon-minus-sign': socialMediaGrid, 'glyphicon glyphicon-plus-sign': !socialMediaGrid}"></i></span>
+                            </accordion-heading>
+                            <!--<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">-->
+                            <div ag-grid="socialMediaGridOptions" class="ag-marke dmGrid" style="height: 65px;"></div>
+                            <!--</div>-->
+                        </accordion-group>
+
+                        <accordion-group class="cursor-pointer" is-open="competitionGrid">
+                            <accordion-heading ag-grid-resize watch="competitionGrid" gridapi="competitionGridOptions">
+                                Competition Pricing<span class="pull-right"><i class="pull-right glyphicon"
+                                                                        ng-class="{'glyphicon glyphicon-minus-sign': competitionGrid, 'glyphicon glyphicon-plus-sign': !competitionGrid}"></i></span>
+                            </accordion-heading>
+                            <!--<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">-->
+                            <div ag-grid="competitionGridOptions" class="ag-marke dmGrid"></div>
+                            <!--</div>-->
+                        </accordion-group>
+                    </accordion>
+                </div>
+                <!--<div class="custom-container custom-accordion">-->
+                    <!--<accordion>-->
+
+                    <!--</accordion>-->
+                <!--</div>-->
+                <!--<div class="custom-container custom-accordion">-->
+                    <!--<accordion>-->
+
+                    <!--</accordion>-->
+                <!--</div>-->
+                <!--<div class="custom-container custom-accordion">-->
+                    <!--<accordion>-->
+
+                    <!--</accordion>-->
+                <!--</div>-->
+            </div>
+
+        </div>
+        <br>
+        <div class="row" id="dm-page-footer">
+            <button class="btn btn-primary email-btn pull-left" ng-click="sendEmail()"><i class="glyphicon glyphicon-envelope"></i>&nbsp;EMAIL
+            </button>
+            &nbsp;&nbsp;
+            <button class="btn btn-primary save-btn pull-right" ng-click="saveDMInfo()"><i class="glyphicon glyphicon-ok-circle"></i>&nbsp;SAVE
+            </button>
+
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-12 pad-none-left small-screen" ng-show="showSideBar" id="dmSideBar" ng-include src="'views/modules/dataManagement/dataManagementRightBar.html'"></div>
+
+</div>

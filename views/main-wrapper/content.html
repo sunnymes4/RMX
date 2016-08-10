@@ -1,0 +1,27 @@
+<!-- Wrapper-->
+<div id="wrapper">
+
+    <!-- Page wraper -->
+    
+    <!-- ng-class with current state name give you the ability to extended customization your view -->
+    <div id="page-wrapper " class=" {{$state.current.name}} preScrollable" auto-window-height height-to-reduce="1">
+
+        <!-- Page wrapper -->
+        <div ng-include="'views/main-wrapper/topnavbar.html'"></div>
+        <div class="container">
+        <!-- Navigation -->
+            <div ng-include="'views/main-wrapper/navigation.html'" data-ng-controller="NavigationController"></div>
+
+            <!-- Main view  -->
+            <div ui-view class="content" auto-window-height height-to-reduce="90" ></div>
+        </div>
+
+        <!-- Footer -->
+        <!--<div ng-include="'views/main-wrapper/footer.html'"></div>-->
+
+    </div>
+   
+    <!-- End page wrapper-->
+
+</div>
+<!-- End wrapper-->

@@ -1,0 +1,657 @@
+<div class="row">
+    <div class="{{classForMainContent}}" id="sc-page">
+        <div class="col-lg-12 hierarchy">
+            <div class="row">
+                <div class="col-md-11 col-sm-11">
+                    <h2 class="clr1 text-center">
+                        <span>Strategy Configuration</span>
+                    </h2>
+                </div>
+                <div class="col-md-1 col-sm-1">
+                    <a href="" ng-click="toggleSideBar()"><span class="col-view pull-right"><b><i
+                            class="fa fa-angle-double-right fa-2x"></i></b></span></a>
+                </div>
+            </div>
+            <!--<hierarchy-nav menu-list="hierarchyMenuList" style-class-name="hierarchy"></hierarchy-nav>-->
+            <nav class="{{hierarchy}}" role="navigation">
+                <ul class="nav navbar-nav">
+                    <li><b>Hierarchy</b></li>
+                    <li class="dropdown">
+                        <a href='javascript:void(0)' class="dropdown-toggle" data-toggle="dropdown">{{selectedDepartment.description}}<span
+                                class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href='javascript:void(0)' ng-repeat="department in departmentList"
+                                   ng-click="selectDepartment(department)">{{department.description}}</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href='javascript:void(0)' class="dropdown-toggle" data-toggle="dropdown">{{selectedCategory.description}}<span
+                                class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href='javascript:void(0)' ng-repeat="category in categoryList"
+                                   ng-click="selectCategory(category)">{{category.description}}</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href='javascript:void(0)' class="dropdown-toggle" data-toggle="dropdown">{{selectedSubCategory.description}}<span
+                                class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href='javascript:void(0)' ng-repeat="subCategory in subCategoryList"
+                                   ng-click="selectSubCategory(subCategory)">{{subCategory.description}}</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href='javascript:void(0)' class="dropdown-toggle" data-toggle="dropdown">{{selectedPlanogram.description}}<span
+                                class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href='javascript:void(0)' ng-repeat="planogram in planogramList"
+                                   ng-click="selectPlanogram(planogram)">{{planogram.description}}</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <div class="row custom-container pad-none mar-none">
+                <div class="col-lg-4 col-md-4 chart-background-active hide-grid-lines pad-none">
+                    <h3>Revenue</h3>
+                    <nvd3 options="revenueChartOptions" data="SCBarChartData.revenues"></nvd3>
+                </div>
+                <div class="col-lg-4 col-md-4 chart-background hide-grid-lines pad-none">
+                    <h3>Profit</h3>
+                    <nvd3 options="profitChartOptions" data="SCBarChartData.profits"></nvd3>
+                </div>
+                <div class="col-lg-4 col-md-4 chart-background hide-grid-lines pad-none">
+                    <h3>Volume</h3>
+                    <nvd3 options="volumeChartOptions" data="SCBarChartData.volumes"></nvd3>
+                </div>
+            </div>
+            <div class="row custom-container chart-description mar-none pad-none">
+                <div class="col-lg-2 col-md-2 col-sm-2">
+                    <span class='chart-description-box' style='background-color: #0099ff;'></span><span
+                        class="chart-description-text">Last Year </span>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2">
+                    <span class='chart-description-box' style='background-color: #66cc33;'></span><span
+                        class="chart-description-text">Last Month</span>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2">
+                    <span class='chart-description-box' style='background-color: #9999ff;'></span><span
+                        class="chart-description-text">Last Week</span>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="row">
+                        <div class="col-lg-5 col-md-5 col-sm-5">
+                            <span class="chart-description-text"><input type="radio" class="custom-radio-button" ng-model="preferedUnitId"
+                                                                        ng-click="changeUnit(1)" ng-value="1"
+                                                                        name="selectUnit"/><span
+                                    class="lbl padding-8"> </span>Percentage</span>
+                        </div>
+                        <div class="col-lg-7 col-md-7 col-sm-7">
+                            <span class="chart-description-text"><input type="radio" class="custom-radio-button" ng-model="preferedUnitId"
+                                                                        ng-click="changeUnit(0)" ng-value="0"
+                                                                        name="selectUnit"/><span
+                                    class="lbl padding-8"> </span>Actual numbers</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row custom-container pad-none mar-none">
+                <div class="custom-accordion">
+                    <accordion close-others="false">
+                        <accordion-group class="cursor-pointer pad-none" ng-init="isOpen = true" is-open="isOpen">
+                            <accordion-heading>
+                                Role Classification Matrix<span class="pull-right"><i class="pull-right glyphicon"
+                                                                                      ng-class="{'glyphicon glyphicon-minus-sign': isOpen, 'glyphicon glyphicon-plus-sign': !isOpen}"></i></span>
+                            </accordion-heading>
+                            <div class="pad-t-r matrix">
+                                <div class="col-lg-12 col-md-12 col-sm-12 pad-none">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 pad-none text-center">
+                                        <div class="col-lg-6 col-md-6 col-sm-6 pad-none text-center">
+                                            <span class="color-9ba1ad">Drive Profit</span>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-6 pad-none text-center">
+                                            <span class="color-9ba1ad">Drive Traffic</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 pad-none">
+                                        <nvd3 options="scatterChartoptions" data="roleClassificationData"></nvd3>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 pad-none text-center">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 pad-none text-center">
+                                        <span class="color-9ba1ad">Increase Visibility</span>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 pad-none text-center">
+                                        <span class="color-9ba1ad">Promote</span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 pad-none text-center">
+                                    <div class="row sc-matrix-chart-export">
+                                        <div class="col-lg-4 col-md-4 col-sm-4 pad-none text-center">
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-4 pad-none text-center">
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-4 pad-none">
+
+                                            <button class="btn btn-primary email-btn pull-right"><i
+                                                    class="fa text-danger fa-file-pdf-o"></i>&nbsp;PDF
+                                            </button>
+                                            <button class="btn btn-primary email-btn pull-right"><i
+                                                    class="fa text-info fa-file-excel-o"></i>&nbsp;EXCEL
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!--<div class="pad-t-r matrix">-->
+                            <!--<div class="col-lg-1 col-md-1 col-sm-1 pad-l-r5">-->
+                            <!--<div class="{{!showSideBar ? 'verticalLine ' : 'verticalLine verticalLineTwoColumn'}}">&nbsp;</div>-->
+                            <!--<p class="vericaltext">Volume</p>-->
+
+                            <!--<div class="{{!showSideBar ? 'verticalLine ' : 'verticalLine verticalLineTwoColumn'}}">&nbsp;</div>-->
+                            <!--</div>-->
+                            <!--<div class="col-lg-11 col-md-11 col-sm-11 pad-none">-->
+                            <!--<div class="col-lg-12 col-md-12 pad-none">-->
+                            <!--<div class="{{showSideBar ? 'col-lg-12 col-md-12 scatterChartBorder ' : 'col-lg-6 col-md-6 scatterChartBorder'}}">-->
+                            <!--<h4>Drive Profit</h4>-->
+                            <!-- -->
+                            <!--</div>-->
+                            <!--<div class="{{showSideBar ? 'col-lg-12 col-md-12 scatterChartBorder ' : 'col-lg-6 col-md-6 scatterChartBorder'}}">-->
+                            <!--<h4>Drive Traffic</h4>-->
+                            <!--<nvd3 options="scatterChartoptions" data="scatterChartData"></nvd3>-->
+                            <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="col-lg-12 col-md-12 pad-none">-->
+                            <!--<div class="{{showSideBar ? 'col-lg-12 col-md-12 scatterChartBorder ' : 'col-lg-6 col-md-6 scatterChartBorder'}}">-->
+                            <!--<nvd3 options="scatterChartoptions" data="scatterChartData"></nvd3>-->
+                            <!--<h4>Increase Visibility</h4>-->
+                            <!--</div>-->
+                            <!--<div class="{{showSideBar ? 'col-lg-12 col-md-12 scatterChartBorder ' : 'col-lg-6 col-md-6 scatterChartBorder'}}">-->
+                            <!--<nvd3 options="scatterChartoptions" data="scatterChartData"></nvd3>-->
+                            <!--<h4>Promote</h4>-->
+                            <!--</div>-->
+                            <!--</div>-->
+
+                            <!--</div>-->
+                            <!--<div class="clear"></div>-->
+                            <!--<div class="col-lg-12 col-md-12 col-sm-12 pad-none">-->
+                            <!--<div class="col-lg-12 m-t-sm clear">-->
+                            <!--<p class="matrix-btns pull-right mar-none">-->
+                            <!--<button class="btn"><i class="fa fa-file-excel-o"></i>Excel</button>-->
+                            <!--<button class="btn"><i class="fa fa-file-pdf-o"></i>PDF</button>-->
+                            <!--</p>-->
+                            <!--</div>-->
+                            <!--<div class="{{!showSideBar ? 'm-l-lg col-lg-12 pad-none' : 'col-lg-12 pad-none m-l-lg'}}">-->
+                            <!--<div class="{{!showSideBar ? 'horizontalLine pull-left ' : 'horizontalLine pull-left horizontalLineTwoColumn'}}">&nbsp;</div>-->
+                            <!--<p class="pull-left pad-r-l clr2">Elasticity</p>-->
+                            <!--<div class="horizontalLine pull-left">&nbsp;</div>-->
+                            <!--</div>-->
+                            <!--</div>-->
+                            <!--</div>-->
+                        </accordion-group>
+                    </accordion>
+                    <accordion>
+                        <accordion-group class="cursor-pointer" is-open="isOpen" ng-click="refreshSlider()">
+                            <accordion-heading>
+                                Category Constraints<span class="pull-right"><i class="pull-right glyphicon"
+                                                                                ng-class="{'glyphicon glyphicon-minus-sign': isOpen, 'glyphicon glyphicon-plus-sign': !isOpen}"></i></span>
+                            </accordion-heading>
+                            <div class="row custom-container custom-range-slider pad-none">
+                                <div class="col-lg-12 col-md-12 col-sm-12 pad-none scenario m-t-sm">
+
+                                    <div class="col-lg-3 col-md-12 col-sm-12 pad-none scenario-head">
+                                        <label class=" pad-r-l5">Scenario Management</label>
+                                    </div>
+                                    <div class="col-lg-2 col-md-6 col-sm-6 pad-r-l5 form-control1 bdr-r-none scenario-drop-menu">
+                                        <label class="col-lg-5 col-md-5 pad-none">Goal</label>
+
+                                        <div class="col-lg-7 col-md-7 pad-none">
+                                            <select class="form-control01" ng-model="SCInfo.input.goal"
+                                                    ng-options="goal.id as goal.code for goal in SCInfo.goalsList">
+                                                <option value="" disabled>Select</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 col-md-6 col-sm-6 pad-r-l5 form-control1 bdr-r-none scenario-drop-menu">
+                                        <label class="col-lg-5 col-md-5 pad-none">Bounds</label>
+
+                                        <div class="col-lg-7 col-md-7 pad-none">
+                                            <select class="form-control01" ng-model="SCInfo.input.bound"
+                                                    ng-options="bound.id as bound.code for bound in SCInfo.boundList">
+                                                <option value="" disabled>Select</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 col-md-6 col-sm-6 pad-r-l5 form-control1 bdr-r-none scenario-drop-menu">
+                                        <label class="col-lg-7 col-md-5 col-sm-5 pad-none">Target CPI</label>
+
+                                        <div class="col-lg-5 col-md-7 col-sm-7 pad-none">
+                                            <select class="form-control01" ng-model="SCInfo.input.targetCpi"
+                                                    ng-options="bound.id as bound.code for bound in SCInfo.targetCPI">
+                                                <option value="" disabled>Select</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-6 pad-r-l5 form-control1 bdr-r-none mar-btm-sm scenario-drop-menu">
+                                        <label class="col-lg-7 col-md-5 col-sm-5 pad-none">Margin Rule</label>
+
+                                        <div class="col-lg-5 col-md-7 col-sm-7 pad-none">
+                                            <select class="form-control01" ng-model="SCInfo.input.marginRule"
+                                                    ng-options="bound.id as bound.code for bound in SCInfo.marginRule">
+                                                <option value="" disabled>Select</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 pad-none clear">
+                                    <div class="{{showSideBar ? 'col-lg-6 col-md-12 col-sm-6' : 'col-lg-3 col-md-3 col-sm-6'}}">
+                                        <div class="priceRangeSlider">
+                                            <br>
+                                            <h5 class="color-white">Overall Price
+                                                Change Limits </h5>
+                                            <rzslider rz-slider-model="rangeSlider.overallPriceChangeSlider.minValue"
+                                                      rz-slider-high="rangeSlider.overallPriceChangeSlider.maxValue"
+                                                      rz-slider-options="rangeSlider.overallPriceChangeSlider.options"></rzslider>
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <div class="{{showSideBar ? 'col-lg-6 col-md-12 col-sm-6' : 'col-lg-3 col-md-3 col-sm-6'}}">
+                                        <div class="volumeChangeSlider">
+                                            <br>
+                                            <h5 class="color-white">Overall Volume Change Limits </h5>
+                                            <rzslider rz-slider-model="rangeSlider.overallVolumeChangeSlider.minValue"
+                                                      rz-slider-high="rangeSlider.overallVolumeChangeSlider.maxValue"
+                                                      rz-slider-options="rangeSlider.overallVolumeChangeSlider.options"></rzslider>
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <div class="{{showSideBar ? 'col-lg-6 col-md-12 col-sm-6' : 'col-lg-3 col-md-3 col-sm-6'}}">
+                                        <div class="productPriceChangeSlider">
+                                            <br>
+                                            <h5 class="color-white">Product - Price Change Limits</h5>
+                                            <rzslider rz-slider-model="rangeSlider.productPriceChangeSlider.minValue"
+                                                      rz-slider-high="rangeSlider.productPriceChangeSlider.maxValue"
+                                                      rz-slider-options="rangeSlider.productPriceChangeSlider.options"></rzslider>
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <div class="{{showSideBar ? 'col-lg-6 col-md-12 col-sm-6' : 'col-lg-3 col-md-3 col-sm-6'}}">
+                                        <div class="productVolumeChangeSlider">
+                                            <br>
+                                            <h5 class="color-white">Product - Volume Change Limits</h5>
+                                            <rzslider rz-slider-model="rangeSlider.productVolumeChangeSlider.minValue"
+                                                      rz-slider-high="rangeSlider.productVolumeChangeSlider.maxValue"
+                                                      rz-slider-options="rangeSlider.productVolumeChangeSlider.options"></rzslider>
+                                        </div>
+                                        <br>
+                                    </div>
+                                </div>
+                            </div>
+                        </accordion-group>
+                    </accordion>
+                    <accordion close-others="false">
+                        <accordion-group class="cursor-pointer sc-relationship-review" is-open="isOpen"
+                                         ng-click="refreshSlider()">
+                            <accordion-heading>
+                                Relationship Review<span class="pull-right"><i class="pull-right glyphicon"
+                                                                               ng-class="{'glyphicon glyphicon-minus-sign': isOpen, 'glyphicon glyphicon-plus-sign': !isOpen}"></i></span>
+                            </accordion-heading>
+                            <div class="col-lg-12 pad-none rel-menu-button-grp">
+                                <div class="col-lg-3 col-md-3 col-sm-6"
+                                     ng-class="{'attr-type-btn': selectedRelationType ==  'Size Match'} "
+                                     ng-click="activateAttribute('Size Match')">
+                                    <span>Size</span>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6"
+                                     ng-class="{'attr-type-btn': selectedRelationType ==  'Brand Match'} "
+                                     ng-click="activateAttribute('Brand Match')">
+                                    <span>Brand</span>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6"
+                                     ng-class="{'attr-type-btn': selectedRelationType ==  'Line Match'} "
+                                     ng-click="activateAttribute('Line Match')">
+                                    <span>Line</span>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6"
+                                     ng-class="{'attr-type-btn': selectedRelationType ==  'Feature Match'} "
+                                     ng-click="activateAttribute('Feature Match')">
+                                    <span>Feature</span>
+                                </div>
+                            </div>
+                            <br>
+                            <br>
+                            <br>
+
+                            <div class="row custom-container">
+                                <div class="col-lg-3 col-md-3 col-sm-3 " ng-repeat="relation in [0,1, 2, 3]">
+                                    <div class="row">
+                                        <span class="margin-left-30">{{selectedRelationType}} {{(relation)+1}}</span>
+                                    </div>
+                                    <br>
+
+                                    <div style="height: 300px;" ng-if=" selectedRelationType ==  'Size Match'">
+                                        <rzslider rz-slider-model="relatioshipReviewSizeSlider[relation].minValue"
+                                                  rz-slider-high="relatioshipReviewSizeSlider[relation].maxValue"
+                                                  rz-slider-options="relatioshipReviewSizeSlider[relation].options"></rzslider>
+                                    </div>
+                                    <div style="height: 300px;" ng-if=" selectedRelationType ==  'Brand Match'">
+                                        <rzslider rz-slider-model="relatioshipReviewBrandSlider[relation].minValue"
+                                                  rz-slider-high="relatioshipReviewBrandSlider[relation].maxValue"
+                                                  rz-slider-options="relatioshipReviewBrandSlider[relation].options"></rzslider>
+                                    </div>
+                                    <div style="height: 300px;" ng-if=" selectedRelationType ==  'Line Match'">
+                                        <rzslider rz-slider-model="relatioshipReviewLineSlider[relation].minValue"
+                                                  rz-slider-high="relatioshipReviewLineSlider[relation].maxValue"
+                                                  rz-slider-options="relatioshipReviewLineSlider[relation].options"></rzslider>
+                                    </div>
+                                    <div style="height: 300px;" ng-if=" selectedRelationType ==  'Feature Match'">
+                                        <rzslider rz-slider-model="relatioshipReviewFeatureSlider[relation].minValue"
+                                                  rz-slider-high="relatioshipReviewFeatureSlider[relation].maxValue"
+                                                  rz-slider-options="relatioshipReviewFeatureSlider[relation].options"></rzslider>
+                                    </div>
+                                    <br>
+                                </div>
+                            </div>
+                        </accordion-group>
+                    </accordion>
+
+                    <accordion>
+                        <accordion-group class="cursor-pointer" is-open="isOpen" ng-click="refreshSlider()">
+                            <accordion-heading>
+                                Price Settings<span class="pull-right"><i class="pull-right glyphicon"
+                                                                     ng-class="{'glyphicon glyphicon-minus-sign': isOpen, 'glyphicon glyphicon-plus-sign': !isOpen}"></i></span>
+                            </accordion-heading>
+                                <div ag-grid="supportTicketsGridOptions" class="ag-marke scGrid" style="height:300px"></div>
+                        </accordion-group>
+                    </accordion>
+
+                    <accordion>
+                        <accordion-group class="cursor-pointer" is-open="isOpen" ng-click="refreshSlider()">
+                            <accordion-heading>
+                                Promotion<span class="pull-right"><i class="pull-right glyphicon"
+                                                                     ng-class="{'glyphicon glyphicon-minus-sign': isOpen, 'glyphicon glyphicon-plus-sign': !isOpen}"></i></span>
+                            </accordion-heading>
+                            <div class="row custom-container custom-range-slider pad-none">
+                                <div class="col-lg-12 col-md-12 col-sm-12 pad-none scenario m-t-sm">
+                                    <div class="col-lg-2 col-md-2 pad-none scenario-head">
+
+                                        <div class="col-lg-6 col-md-6 col-sm-6 pad-none text-center ">
+                                            <input type="checkbox" class="custom-check-box"/><span
+                                                class="lbl padding-8"></span>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-6 pad-none text-center ">
+                                            <label class=" pad-r-l5">Enable</label>
+                                        </div>
+                                    </div>
+                                    <!--<div class="col-lg-3 col-md-6 pad-r-l5 form-control1 bdr-r-none">-->
+                                        <!--<label class="col-lg-5 col-md-5 pad-none">One Time</label>-->
+
+                                        <!--<div class="col-lg-7 col-md-7 pad-none">-->
+                                            <!--<select class="form-control01">-->
+                                                <!--<option>Select</option>-->
+                                                <!--<option>01</option>-->
+                                                <!--<option>02</option>-->
+                                            <!--</select>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                    <div class="col-lg-5 col-md-6 pad-r-l5 form-control1 bdr-r-none">
+                                        <label class="col-lg-5 col-md-5 pad-none">Frequency</label>
+
+                                        <div class="col-lg-7 col-md-7 pad-none">
+                                            <select class="form-control01">
+                                                <option>Select</option>
+                                                <option>Daily</option>
+                                                <option>Weekly</option>
+                                                <option>Monthly</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-5 col-md-6 pad-r-l5 form-control1 mar-btm-sm bdr-r-none">
+                                        <label class="col-lg-5 col-md-5 pad-none">Name Event</label>
+
+                                        <div class="col-lg-7 col-md-7 pad-none">
+                                            <input type="text" class="form-control01" />
+                                            <!--<select class="form-control01">-->
+                                                <!--<option>Name Event</option>-->
+                                                <!--<option>Big Sale 2015</option>-->
+                                            <!--</select>-->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 pad-none scenario m-b-sm">
+                                    <div class="col-lg-2 col-md-2 col-sm-12 pad-none">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 pad-none scenario-head scenario-head2">
+                                            <label class=" pad-r-l5">Allowed Types</label></div>
+                                    </div>
+                                    <div class="col-lg-10 col-md-10 col-sm-12 pad-none">
+                                        <div class="col-lg-4 col-md-6 col-sm-6 pad-r-l5 form-control1">
+
+                                            <div class="col-lg-2 col-md-2 col-sm-2 pad-none text-center ">
+                                                <input type="checkbox" class="custom-check-box"/><span
+                                                    class="lbl padding-8 pad-t-sm"></span>
+                                            </div>
+                                            <label class="col-lg-10 col-md-10 col-sm-10 pad-none">Buy One Get
+                                                One</label>
+                                        </div>
+                                        <div class="col-lg-4 col-md-6 col-sm-6 pad-r-l5 form-control1">
+                                            <div class="col-lg-2 col-md-2 col-sm-2 pad-none text-center ">
+                                                <input type="checkbox" class="custom-check-box"/><span
+                                                    class="lbl padding-8 pad-t-sm"></span>
+                                            </div>
+                                            <label class="col-lg-10 col-md-10 col-sm-10 pad-none">% Off</label>
+                                        </div>
+                                        <div class="col-lg-4 col-md-6 col-sm-6 pad-r-l5 form-control1 bdr-r-none">
+                                            <div class="col-lg-2 col-md-2 col-sm-2 pad-none text-center ">
+                                                <input type="checkbox" class="custom-check-box"/><span
+                                                    class="lbl padding-8 pad-t-sm"></span>
+                                            </div>
+                                            <label class="col-lg-10 col-md-10 col-sm-10 pad-none">$ Off</label>
+                                        </div>
+                                        <div class="col-lg-4 col-md-6 col-sm-6 pad-r-l5 form-control1">
+
+                                            <div class="col-lg-2 col-md-2 col-sm-2 pad-none text-center ">
+                                                <input type="checkbox" class="custom-check-box"/><span
+                                                    class="lbl padding-8 pad-t-sm"></span>
+                                            </div>
+                                            <label class="col-lg-10 col-md-10 col-sm-10 pad-none">Free Shipping / Free
+                                                Returns</label>
+                                        </div>
+                                        <div class="col-lg-4 col-md-6 col-sm-6 pad-r-l5 form-control1">
+                                            <div class="col-lg-2 col-md-2 col-sm-2 pad-none text-center ">
+                                                <input type="checkbox" class="custom-check-box"/><span
+                                                    class="lbl padding-8 pad-t-sm"></span>
+                                            </div>
+                                            <label class="col-lg-10 col-md-10 col-sm-10 pad-none">Flash Sales</label>
+                                        </div>
+                                        <div class="col-lg-4 col-md-6 col-sm-6 pad-r-l5 form-control1 bdr-r-none">
+                                            <div class="col-lg-2 col-md-2 col-sm-2 pad-none text-center ">
+                                                <input type="checkbox" class="custom-check-box"/><span
+                                                    class="lbl padding-8 pad-t-sm"></span>
+                                            </div>
+                                            <label class="col-lg-10 col-md-10 col-sm-10 pad-none">Buy More Save
+                                                More</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </accordion-group>
+                    </accordion>
+                    <accordion close-others="false">
+                        <accordion-group class="cursor-pointer" is-open="isOpen"
+                                         ng-click="refreshSlider()">
+                            <accordion-heading>
+                                Markdown Settings<span class="pull-right"><i class="pull-right glyphicon"
+                                                                             ng-class="{'glyphicon glyphicon-minus-sign': isOpen, 'glyphicon glyphicon-plus-sign': !isOpen}"></i></span>
+                            </accordion-heading>
+                            <div class="row" style="padding-right:15px; padding-left: 15px;">
+                                <div class="col-lg-12 col-md-12 col-sm-12 pad-none scenario">
+
+                                    <div class="col-lg-2 col-md-2 pad-none scenario-head">
+                                        <div class="col-lg-6 col-md-6 col-sm-6 pad-none text-center ">
+                                            <input type="checkbox" class="custom-check-box"/><span
+                                                class="lbl padding-8"></span>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-6 pad-none text-center ">
+                                            <label class=" pad-r-l5">Enable</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 pad-r-l5 form-control1">
+                                        <label class="col-lg-5 col-md-5 pad-none">&nbsp;&nbsp;Goal</label>
+
+                                        <div class="col-lg-7 col-md-7 pad-none">
+                                            <select class="form-control01" ng-model="markdown.goal"
+                                                    ng-options="goal.id as goal.code for goal in SCInfo.goalsList">
+                                                <option value="" disabled>Select</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 pad-r-l5 form-control1">
+                                        <label class="col-lg-4 col-md-5 pad-none">% Gaps</label>
+
+                                        <div class="col-lg-8 col-md-7 pad-none">
+                                            <input type="text" class="mark-down-gap-input" ng-model="gaps"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 pad-r-l5 form-control1 mar-btm-sm">
+                                        <label class="col-lg-5 col-md-5 pad-none">Frequency</label>
+
+                                        <div class="col-lg-7 col-md-7 pad-none">
+                                            <select class="form-control01">
+                                                <option>Select</option>
+                                                <option>Daily</option>
+                                                <option>Weekly</option>
+                                                <option>Monthly</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 pad-none">
+                                    <div class="{{showSideBar ? 'col-lg-12 col-md-12 col-sm-12 m-t-sm  border-bottom' : 'col-lg-3 col-md-12 col-sm-12 m-t-sm'}}">
+                                        <h4 class="color-white align-center">Price Ending Points</h4>
+                                    </div>
+                                    <div class="{{showSideBar ? 'col-lg-6 col-md-12 col-sm-12 m-t-sm' : 'col-lg-4 col-md-6 col-sm-12 m-t-sm'}}"
+                                         ng-class="{'mark-down-price-end-point-sec': showSideBar}">
+                                        <div class="{{showSideBar ? 'bdr left-pos':'bdr'}}"
+                                             ng-style="{width: showSideBar ? '100%' : ''}">
+                                            <span><i class="fa fa-dollar"></i></span>
+
+                                            <div class="column" ng-repeat="column in priceEnd2DArray track by $index"
+                                                 style="display:block;">
+                                                <input type="checkbox" ng-model="columnModel[$index]"
+                                                       ng-click="selectRow(columnModel[$index], column)"
+                                                       class="priceEndColumnCheckBox custom-check-box mark-down-column-check-box"/><span
+                                                    class="lbl"></span>
+
+                                                <div class="row priceEndingPointCoulmn">
+                                                <span class="priceEndPointCell" ng-repeat="cell in column">
+                                                    <span ng-show="$parent.$index == 0">
+                                                        <input type="checkbox"
+                                                               class="priceEndRowCheckBox custom-check-box mark-down-row-check-box"
+                                                               ng-model="rowModel[$index]"
+                                                               ng-click="selectColumn(rowModel[$index], cell)"/>
+                                                       <span class="lbl"></span>
+                                                    </span>
+                                                    <center style="padding-top:4px"
+                                                            ng-class="{'activatedCell': activatedCells.indexOf(cell) >= 0}"
+                                                            ng-click="activateCell(cell, activatedCells.indexOf(cell) >= 0)">
+                                                        {{cell}}
+                                                    </center>
+                                                </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="{{showSideBar ? 'col-lg-6 col-md-12 col-sm-12 m-t-sm ' : 'col-lg-5 col-md-6 col-sm-12 m-t-sm'}}"
+                                         ng-class="{'width-100-p': showSideBar}">
+                                        <h4 class="color-white text-center"> Set Limits</h4>
+                                        <br>
+
+                                        <div class="row">
+                                            <div class="col-lg-1 col-md-1"></div>
+                                            <div class="col-lg-10 col-md-10">
+                                                <label>Minimum Discount</label>
+                                                <select class="form-control01 mark-down-discount-select">
+                                                    <option>Select</option>
+                                                    <option>5%</option>
+                                                    <option>10%</option>
+                                                    <option>15%</option>
+                                                    <option>20%</option>
+                                                    <option>25%</option>
+                                                    <option>30%</option>
+                                                    <option>35%</option>
+                                                    <option>40%</option>
+                                                    <option>45%</option>
+                                                    <option>50%</option>
+                                                    <option>55%</option>
+                                                    <option>60%</option>
+                                                    <option>65%</option>
+                                                    <option>70%</option>
+                                                    <option>75%</option>
+                                                    <option>80%</option>
+                                                    <option>85%</option>
+                                                    <option>90%</option>
+                                                    <option>95%</option>
+                                                    <option>100%</option>
+
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-1 col-md-1"></div>
+                                        </div>
+                                        <br>
+                                        <br>
+
+                                        <div class="row">
+                                            <div class="col-lg-1 col-md-1"></div>
+                                            <div class="col-lg-10 col-md-10">
+                                                <label>Maximum Discount</label>
+                                                <select class="form-control01 mark-down-discount-select">
+                                                    <option>Select</option>
+                                                    <option>5%</option>
+                                                    <option>10%</option>
+                                                    <option>15%</option>
+                                                    <option>20%</option>
+                                                    <option>25%</option>
+                                                    <option>30%</option>
+                                                    <option>35%</option>
+                                                    <option>40%</option>
+                                                    <option>45%</option>
+                                                    <option>50%</option>
+                                                    <option>55%</option>
+                                                    <option>60%</option>
+                                                    <option>65%</option>
+                                                    <option>70%</option>
+                                                    <option>75%</option>
+                                                    <option>80%</option>
+                                                    <option>85%</option>
+                                                    <option>90%</option>
+                                                    <option>95%</option>
+                                                    <option>100%</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-1 col-md-1"></div>
+                                        </div>
+                                        <br>
+                                        <br>
+                                    </div>
+                                </div>
+                            </div>
+                        </accordion-group>
+                    </accordion>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="dm-page-footer">
+            <button class="btn btn-primary email-btn pull-left" ng-click="sendEmail()"><i class="glyphicon glyphicon-envelope"></i>&nbsp;EMAIL
+            </button>
+            &nbsp;&nbsp;
+            <button class="btn btn-primary save-btn pull-right" ng-click="saveSCInfo()"><i
+                    class="glyphicon glyphicon-ok-circle"></i>&nbsp;SAVE
+            </button>
+
+        </div>
+    </div>
+    <div ng-include src="'views/modules/strategyConfiguration/strategyConfigurationRightBar.html'"></div>
+
+</div>

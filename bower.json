@@ -1,0 +1,43 @@
+{
+  "name": "RMX",
+  "authors": [
+    "custologix"
+  ],
+  "description": "RMX - Rapid Mathematics",
+  "main": "app.js",
+  "license": "",
+  "dependencies": {
+    "angular": "angularjs#^1.5.8",
+    "angular-ui-router": "^0.3.1",
+    "angular-cookies": "^1.5.8",
+    "angular-sanitize": "^1.5.8",
+    "jquery": "^3.1.0",
+    "bootstrap": "^3.3.7",
+    "font-awesome": "^4.6.3",
+    "angular-nvd3": "^1.0.8",
+    "angular-animate": "^1.5.8",
+    "angular-ui-notification": "^0.2.0",
+    "angularjs-slider": "^5.4.3",
+    "lodash": "^4.14.2",
+    "PACE": "pace#^1.0.2",
+    "metisMenu": "^2.5.2",
+    "oclazyload": "^1.0.9",
+    "angular-bootstrap": "^2.0.1",
+    "nvd3": "^1.8.4",
+    "angular-ui-switch": "^0.1.1",
+    "ag-grid": "^5.0.7"
+  },
+  "install": {
+    "path": {
+      "js": "libs/{name}",
+      "css": "assets/css/{name}/css",
+      "eot": "assets/css/{name}/fonts",
+      "svg": "assets/css/{name}/fonts",
+      "ttf": "assets/css/{name}/fonts",
+      "woff": "assets/css/{name}/fonts",
+      "map": "assets/css/{name}/css"
+    },
+    "sources": {}
+  },
+  "homepage": ""
+}
