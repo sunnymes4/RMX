@@ -7,7 +7,7 @@ angular.module('rmx-ui-portal', [
     'ngSanitize',
     'ngCookies',
     'ui.bootstrap',
-    // 'nvd3ChartDirectives',
+    //'nvd3ChartDirectives',
     'nvd3',
     'rzModule',
     'uiSwitch',

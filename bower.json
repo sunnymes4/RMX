@@ -25,7 +25,8 @@
     "angular-bootstrap": "^2.0.1",
     "nvd3": "^1.8.4",
     "angular-ui-switch": "^0.1.1",
-    "ag-grid": "^5.0.7"
+    "ag-grid": "^5.0.7",
+    "angularjs-nvd3-directives": "^0.0.7"
   },
   "install": {
     "path": {
