@@ -1,0 +1,95 @@
+/**
+ * Copyright (C) 2015, 2016, Custologix Inc and/or its affiliates. All Rights Reserved.
+ * CUSTOLOGYX PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ */
+ 
+/**
+ * @author Bhupinder Singh
+ * @since 1.0
+ */
+ 
+(function(){
+	'use strict';
+	angular
+	    .module('mep_mgmt_portal',[
+	        'ui.router',                    // Routing
+	        'oc.lazyLoad',                    // ocLazyLoad
+	        'ui.bootstrap',                 // Ui Bootstrap
+	        'ngResource',                  // REST Resource
+	        'controllers',					//load all controllers
+	        'services',
+	        'filters',
+	        'ngMessages',
+	        'pascalprecht.translate',
+	        'ui-notification',
+	        'ngTable',
+	        'LocalStorageModule',
+	        'formData',
+	        'ngStorage',
+	        'accountsConstants',
+	        'angular-confirm',
+	        'ngAnimate',
+	        'historyStack',
+	        'inventoryConstants',
+	        'ui.router.tabs',
+			'angles',
+			'localytics.directives',
+			'agGrid'
+	        
+	    ])
+
+  		.run(['$rootScope', '$state',function($rootScope, $state) {
+       		
+
+	        $rootScope.$state = $state;
+	    }])
+	    .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider','$httpProvider','localStorageServiceProvider',function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider,$httpProvider,localStorageServiceProvider) {
+	    	
+	    	//localstorage prefix
+	    	 localStorageServiceProvider
+    			.setPrefix('ui-mgmt-portel');
+
+
+	    	$ocLazyLoadProvider.config({
+		        // Set to true if you want to see what and when is dynamically loaded
+		        debug: false
+		    });
+
+		    $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+		    $httpProvider.interceptors.push(function($q) {
+		    return {
+			        'responseError': function(rejection){
+		                var defer = $q.defer();
+		                if(rejection.status == 401){
+		                 	if(window.location.hash!="#/login");
+		                 		window.location.hash = 'login';
+		                }
+		                defer.reject(rejection);
+		                return defer.promise;
+		            }
+		        };
+		    });
+            $urlRouterProvider.otherwise('/login');
+
+		    $stateProvider
+                .state('index', {
+                    url: "/index",
+                    controllers:'MainCtrl',
+                    templateUrl: "views/common/content.html",
+                    resolve:{
+                    	event:function(accountGroupFact,CurrncySer,$rootScope){
+                    		return accountGroupFact.getCompanyDetails()
+					                .then(function(e){
+					                   CurrncySer.setCurrency(e.data);
+					                   $rootScope.currency = e.data;
+					                })
+                    	}
+                    }
+                })
+			 }]);
+
+	    
+
+
+})();
+
