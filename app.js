@@ -1,42 +1,36 @@
 
-angular.module('rmx-ui-portal', [
+angular.module('testApp', [
 
     // Core modules
-    'ui.router',
-    'ngAnimate',
-    'ngSanitize',
-    'ngCookies',
-    'ui.bootstrap',
-    //'nvd3ChartDirectives',
-    'nvd3',
-    'rzModule',
-    'uiSwitch',
-    'agGrid',
-
-    'ui-notification',
-
-    'ngDropdowns',
-    'oc.lazyLoad',
-
-    // App modules
-    'common',
-    'DM',
-    'SC',
-    'PC',
-    'RS',
-    'AN'
+    'ui.router'
 ])
-    .config(['$stateProvider', '$urlRouterProvider','$httpProvider', function ($stateProvider, $urlRouterProvider, $httpProvider) {
+    .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function ($stateProvider, $urlRouterProvider, $locationProvider) {
 
-        $urlRouterProvider.otherwise("/index/dataManagement");
-        $httpProvider.defaults.useXDomain = true;
-        //$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-        //$httpProvider.defaults.headers.common['Access-Control-Allow-Headers'] = 'Access-Control-Allow-Origin';
-        //$httpProvider.defaults.headers.common['Access-Control-Allow-Origin'] = 'http://localhost:10000/*';
+        $urlRouterProvider.otherwise("/login");
+
 
         $stateProvider
-            .state('index', {
-                url: "/index",
-                templateUrl: "views/main-wrapper/content.html"
+            .state('sign-in', {
+                url: "/",
+                templateUrl: "sign-in.html",
+                controller: "loginCtrl"
+
+            })
+            .state('main', {
+                url: '/',
+                templateUrl:'main.html'
             });
-    }]);
+       $locationProvider.html5Mode(true);
+    }])
+
+.controller('loginCtrl', ["$scope","$state", function ($scope, $state) {
+    $scope.user = {};
+    $scope.login = function () {
+        if ($scope.user.userName == 'sunny@gmail.com' && $scope.user.password == 123) {
+            alert($scope.user.userName);
+            $state.go('main');
+        } else {
+            alert($scope.user.password);
+        }
+    }
+}])
